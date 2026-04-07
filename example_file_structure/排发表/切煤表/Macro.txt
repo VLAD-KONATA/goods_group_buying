@@ -1,0 +1,18 @@
+Sub ResizeAllImagesByWidth()
+    Dim img As InlineShape
+    Dim targetWidth As Single
+    Dim count As Integer
+    
+    targetWidth = 12  ' 宽度12厘米
+    count = 0
+    
+    For Each img In ActiveDocument.InlineShapes
+        If img.Type = wdInlineShapePicture Then
+            img.LockAspectRatio = msoTrue  ' 保持纵横比
+            img.Width = targetWidth * 28.35
+            count = count + 1
+        End If
+    Next img
+    
+    MsgBox "已按宽度调整 " & count & " 张图片"
+End Sub
