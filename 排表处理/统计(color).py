@@ -118,7 +118,7 @@ name='App警察组吧唧（已到齐）'
 storages=['萌','dock','黄油']
 storage=storages[1]
 
-file_path = rf"./旧排发表/{storage}/{name}.xlsx"
+file_path = rf"./排发表/{storage}/{name}.xlsx"
 
 filename=os.path.basename(file_path).split('.xlsx')[0]  #获取文件名/系列
 obj_path=f'./colors/{name}.xlsx'   #生成目标地址
