@@ -3,9 +3,13 @@ import pandas as pd
 import argparse
 
 def trading_results(cn,good):
-    cn=cn.split('（')[0].strip() if '（' in cn else cn.split('(')[0].strip()
-    result=cn.split('（')[1].strip() if '（' in cn else cn.split('(')[1].strip()
-    result=cn.split('）')[0].strip() if '）' in cn else cn.split(')')[0].strip()
+    try:
+        cn=cn.split('（')[0].strip() if '（' in cn else cn.split('(')[0].strip()
+        result=cn.split('（')[1].strip() if '（' in cn else cn.split('(')[1].strip()
+        result=cn.split('）')[0].strip() if '）' in cn else cn.split(')')[0].strip()
+    except Exception as e:
+        print(f"处理数据时出错：{e}")
+        return None
     good=good+result
     return cn,good
 
@@ -86,11 +90,6 @@ def process_table(args):
                 if pd.isna(good_raw):
                     continue
                 good = str(good_raw).strip()
-                
-                #盲抽检测
-                if ('（' in current_cn or '(' in current_cn) and current_cn not in IGNORE_LIST:
-                    current_cn, good = trading_results(current_cn, good)
-
                 quantity = 1
                 result.append({
                     'cn': current_cn,
